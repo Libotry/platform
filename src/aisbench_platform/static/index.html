@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <title>AISBench · Local EvalOps</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/tour.css">
+  <link rel="stylesheet" href="/monitor.css">
+  <link rel="stylesheet" href="/interactions.css">
+  <link rel="stylesheet" href="/project-select.css">
+  <link rel="stylesheet" href="/excel-export.css">
+  <link rel="stylesheet" href="/perf-compare.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">AI</div><div><strong>AISBench</strong><span>LOCAL EVALOPS</span></div></div>
+      <div class="demo-ribbon"><i></i><span><b>演示模式</b>模拟数据 · 无后端依赖</span></div>
+      <label class="project" for="projectSwitch"><span class="eyebrow">当前项目</span><select id="projectSwitch" aria-label="当前项目"><option>GPU → 昇腾迁移验证</option><option>Prefix Cache 性能调优</option><option>Code Agent 版本回归</option></select></label>
+      <nav aria-label="主导航">
+        <button class="nav active" data-view="overview"><i>◫</i>工作台</button>
+        <button class="nav" data-view="runs"><i>▶</i>Run 管理 <span id="runCount">4</span></button>
+        <button class="nav" data-view="compare"><i>⇄</i>基线对齐</button>
+        <button class="nav" data-view="cases"><i>⌁</i>Case Diff</button>
+        <button class="nav" data-view="workloads"><i>⚡</i>Workload</button>
+        <button class="nav" data-view="perfcompare"><i>⌇</i>性能曲线对比</button>
+        <button class="nav" data-view="monitor"><i>◉</i>Grafana 监控 <em class="live-dot">LIVE</em></button>
+        <button class="nav" data-view="configs"><i>⌘</i>配置中心</button>
+      </nav>
+      <div class="sidebar-foot"><button class="tour-entry" id="tourBtn">▶ 开始汇报导览</button><div class="health"><span></span> 本地演示服务正常</div><small>Runner · Collector · Analysis Hub</small></div>
+    </aside>
+    <main>
+      <header><div><button class="mobile-menu" aria-label="打开菜单">☰</button><span class="crumb">AISBench / <b id="crumb">工作台</b></span></div><div class="header-actions"><span class="local"><i></i>仅本机</span><button class="ghost excel-btn" id="exportPerfExcel">▦ 导出性能 Excel</button><button class="ghost" id="importBtn">导入配置</button><button class="primary" id="newRunBtn">＋ 新建 Run</button></div></header>
+      <section id="app" class="content" aria-live="polite"></section>
+    </main>
+  </div>
+  <dialog id="runDialog">
+    <form id="runForm" method="dialog">
+      <div class="dialog-head"><div><span class="eyebrow">CREATE RUN</span><h2>新建评测任务</h2></div><button value="cancel" class="icon-btn" aria-label="关闭">×</button></div>
+      <div class="steps"><span class="on">1 场景</span><span>2 配置</span><span>3 确认</span></div>
+      <label>任务名称<input name="name" value="Qwen2.5-72B · Prefix Cache 验证" required></label>
+      <div class="form-grid"><label>评测类型<select name="kind"><option value="performance">性能压测</option><option value="accuracy">精度评测</option><option value="agent">Agent 测评</option></select></label><label>执行后端<select name="backend"><option>昇腾 NPU / vLLM</option><option>昇腾 NPU / MindIE</option><option>GPU / vLLM</option></select></label></div>
+      <div class="form-grid"><label>模型<input name="model" value="Qwen2.5-72B"></label><label>Workload<input name="dataset" value="Prefix workload · 2,000 requests"></label></div>
+      <label>AISBench 配置路径（可选）<input name="configPath" placeholder="configs/my_benchmark.py"><small>留空可先保存为草稿；填写后可直接交给现有 AISBench Runner。</small></label>
+      <label class="check"><input type="checkbox" name="execute"> 创建后立即执行</label>
+      <div class="dialog-actions"><button value="cancel" class="ghost">取消</button><button value="default" class="primary">创建 Run</button></div>
+    </form>
+  </dialog>
+  <dialog id="tourDialog" class="tour-dialog">
+    <div class="tour-visual"><span id="tourIndex">01 / 05</span><div class="tour-orbit"><i></i><b id="tourGlyph">◎</b></div></div>
+    <div class="tour-copy"><span class="eyebrow">PRESENTATION TOUR</span><h2 id="tourTitle">从跑分工具到本地 EvalOps</h2><p id="tourText">AISBench Platform 把一次性命令变成可管理的 Run 资产，串起编排、采集、对比、定位与重跑。</p><div class="tour-dots" id="tourDots"></div><div class="dialog-actions"><button class="ghost" id="tourClose">退出导览</button><button class="primary" id="tourNext">下一步 →</button></div></div>
+  </dialog>
+  <input id="fileInput" type="file" accept=".json,.py" hidden>
+  <div id="toast" role="status"></div>
+  <script src="/perf-compare.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

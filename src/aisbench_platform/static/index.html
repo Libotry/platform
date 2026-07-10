@@ -17,7 +17,6 @@
   <div class="shell">
     <aside class="sidebar">
       <div class="brand"><div class="brand-mark">AI</div><div><strong>AISBench</strong><span>LOCAL EVALOPS</span></div></div>
-      <div class="demo-ribbon"><i></i><span><b>演示模式</b>模拟数据 · 无后端依赖</span></div>
       <label class="project" for="projectSwitch"><span class="eyebrow">当前项目</span><select id="projectSwitch" aria-label="当前项目"><option>GPU → 昇腾迁移验证</option><option>Prefix Cache 性能调优</option><option>Code Agent 版本回归</option></select></label>
       <nav aria-label="主导航">
         <button class="nav active" data-view="overview"><i>◫</i>工作台</button>
@@ -29,7 +28,7 @@
         <button class="nav" data-view="monitor"><i>◉</i>Grafana 监控 <em class="live-dot">LIVE</em></button>
         <button class="nav" data-view="configs"><i>⌘</i>配置中心</button>
       </nav>
-      <div class="sidebar-foot"><button class="tour-entry" id="tourBtn">▶ 开始汇报导览</button><div class="health"><span></span> 本地演示服务正常</div><small>Runner · Collector · Analysis Hub</small></div>
+      <div class="sidebar-foot"><button class="tour-entry" id="tourBtn">▶ 开始汇报导览</button><small>Runner · Collector · Analysis Hub</small></div>
     </aside>
     <main>
       <header><div><button class="mobile-menu" aria-label="打开菜单">☰</button><span class="crumb">AISBench / <b id="crumb">工作台</b></span></div><div class="header-actions"><span class="local"><i></i>仅本机</span><button class="ghost excel-btn" id="exportPerfExcel">▦ 导出性能 Excel</button><button class="ghost" id="importBtn">导入配置</button><button class="primary" id="newRunBtn">＋ 新建 Run</button></div></header>
